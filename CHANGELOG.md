@@ -2,6 +2,14 @@
 
 All notable changes to agent-scratchpad will be documented in this file.
 
+## [0.3.0] - 2026-06-18
+
+### Changed
+- Expanded scratchpad role as primary memory point for branch context
+- Added explicit "Always read" and "Always write" trigger lists
+- Emphasized reading before writing — agents must learn existing context before acting
+- Added rule to record *why* approaches were rejected, not just *that* they were
+
 ## [0.2.0] - 2026-06-18
 
 ### Changed
