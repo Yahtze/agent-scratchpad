@@ -2,6 +2,16 @@
 
 All notable changes to agent-scratchpad will be documented in this file.
 
+## [0.4.0] - 2026-06-18
+
+### Changed
+- Replaced "Context for Next Session" with "Open Questions" — captures unresolved issues needing human input
+- Renamed "Patches Tried" to "Approaches Tried" — more universal, covers features not just fixes
+- Added `/scope` slash command for creating fresh scratchpads within a branch
+- Expanded frontmatter description to be more explicit about when to trigger
+- Added non-git fallback: prompt user for scope name instead of using branch
+- Simplified bash block: removed fragile `echo "CREATE_NEW"` pattern, use prose instead
+
 ## [0.3.0] - 2026-06-18
 
 ### Changed

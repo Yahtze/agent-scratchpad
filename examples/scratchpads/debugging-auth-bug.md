@@ -12,10 +12,10 @@ Fix intermittent 401 errors on `/api/user` endpoint. Happens ~10% of requests un
 - Chose connection locking over request queuing — simpler, lower latency impact
 - Will not upgrade ioredis again until we have integration tests for connection pooling
 
-## Patches Tried
+## Approaches Tried
 
-1. **Increased pool size to 20** — reduced frequency but did not fix. Rejected.
-2. **Added mutex to `getClient()`** — works but blocks all requests. Rejected.
+1. **Increased pool size to 20** — reduced frequency but did not fix. Rejected: masks the race, doesn't solve it.
+2. **Added mutex to `getClient()`** — works but blocks all requests under contention. Rejected: unacceptable latency.
 3. **Per-request connection with timeout** — current approach. Testing.
 
 ## Architecture Notes
@@ -26,8 +26,8 @@ Fix intermittent 401 errors on `/api/user` endpoint. Happens ~10% of requests un
 - Redis pool config in `src/redis/pool.ts`
 - Token cache TTL is 5 min, session TTL is 30 min — mismatch causes edge case
 
-## Context for Next Session
+## Open Questions
 
-- Issue started after `ioredis` 4.x → 5.x upgrade (PR #1247)
-- Slack thread: #backend channel, June 15
-- To reproduce: run `k6 load test --scenario concurrent-auth` in `tests/load/`
+- Should we add integration tests for connection pooling before merging?
+- Is the per-request connection approach safe under high concurrency, or do we need a circuit breaker?
+- Related PR #1247 (ioredis upgrade) — should we revert if this fix is too complex?

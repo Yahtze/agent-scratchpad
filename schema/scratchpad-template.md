@@ -1,4 +1,4 @@
-# Scratchpad: [branch-name]
+# Scratchpad: [scope-name]
 
 ## Status: [planning | in-progress | blocked | complete]
 
@@ -11,7 +11,7 @@
 <!-- Choices made and why -->
 - 
 
-## Patches Tried
+## Approaches Tried
 
 <!-- Approaches tested, outcomes, reasons for rejection -->
 - 
@@ -21,7 +21,7 @@
 <!-- How things fit together, relevant file locations, dependencies -->
 - 
 
-## Context for Next Session
+## Open Questions
 
-<!-- Anything a fresh agent or another agent needs to know -->
+<!-- Unresolved issues that need human input or further exploration -->
 - 
