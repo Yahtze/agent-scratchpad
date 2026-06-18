@@ -57,7 +57,7 @@ Outside a git repo, ask the user for a scope name (e.g. "auth-refactor", "api-v2
 
 Then:
 1. Create `scratchpad/<branch>/` directory if it does not exist
-2. If `INDEX.md` does not exist, create it from `schema/scratchpad-template.md`
+2. If `INDEX.md` does not exist, create it from `schema/index-template.md`
 3. Read `INDEX.md` — check the `Active:` line at the top
 4. If `Active:` points to a scoped file, read that file too
 5. Add `scratchpad/` to `.gitignore` if not already present
@@ -80,14 +80,26 @@ Update the scratchpad continuously as you work, not just at the end. Record deci
 
 ### 4. Structure
 
-Follow the template in `schema/scratchpad-template.md`. The scratchpad has these sections:
+Two templates in `schema/`:
 
-- **Status** — current state of work on this branch/scope
+**INDEX.md** (`schema/index-template.md`) — the branch overview:
+
+- **Status** — current state of work on this branch
+- **Overview** — high-level summary of the branch: what, why, current state. Updated on scope changes.
 - **Goal** — what this branch is trying to accomplish
-- **Design Decisions** — choices made and rationale
-- **Approaches Tried** — approaches tested, what worked/didn't, why
-- **Architecture Notes** — how things fit together, relevant file locations
-- **Open Questions** — unresolved issues that need human input or further exploration
+- **Scopes** — list of scoped scratchpads with one-line descriptions
+- **Key Decisions** — branch-level design decisions
+- **Architecture Notes** — branch-level architecture, key file locations
+- **Open Questions** — branch-level unresolved issues
+
+**Scoped scratchpads** (`schema/scope-template.md`) — focused on a specific area:
+
+- **Status** — current state of this scope
+- **Goal** — what this scope is trying to accomplish
+- **Design Decisions** — choices made within this scope
+- **Approaches Tried** — approaches tested, outcomes, reasons for rejection
+- **Architecture Notes** — how this scope fits into the codebase
+- **Open Questions** — unresolved issues within this scope
 
 ### 5. Explicit writes
 
@@ -100,9 +112,10 @@ If a user asks to write something specific to the scratchpad, do it — even if 
 When work branches into multiple concerns on the same branch, use `/scope` to create a focused scratchpad.
 
 1. Ask the user for the scope name
-2. Create `scratchpad/<branch>/<scope-name>.md` from the template
+2. Create `scratchpad/<branch>/<scope-name>.md` from `schema/scope-template.md`
 3. Update `INDEX.md`'s `Active:` line to point to the new file
-4. Add a stub entry in `INDEX.md` listing this scope
+4. Update `INDEX.md`'s `Overview:` to reflect the current focus
+5. Add a stub entry in `INDEX.md`'s Scopes listing this scope
 
 Example `INDEX.md` after running `/scope auth-refactor`:
 
@@ -113,11 +126,14 @@ Active: auth-refactor.md
 
 ## Status: in-progress
 
+## Overview
+Adding dark mode to the app. Currently refactoring auth middleware to support theme persistence in session tokens.
+
 ## Goal
 Add dark mode toggle...
 
 ## Scopes
-- [auth-refactor.md](auth-refactor.md) — refactoring auth middleware
+- [auth-refactor.md](auth-refactor.md) — refactoring auth middleware to support theme persistence
 ```
 
 ### Concluding a scope
@@ -137,9 +153,3 @@ When work on a scoped scratchpad is complete:
 - Never overwrite existing content unless explicitly asked
 - Never delete a scratchpad without asking user
 
-## Relationship to other docs
-
-- `README.md` and other high-level files are the **stable source of truth** for overall architecture
-- These files are expected to be updated once work on a branch is complete and merged
-- Scratchpad files remain intact for versioning and archival purposes
-- Scratchpads capture the *journey*; README captures the *destination*

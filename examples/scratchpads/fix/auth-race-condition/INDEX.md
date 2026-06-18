@@ -4,11 +4,15 @@ Active: INDEX.md
 
 ## Status: in-progress
 
+## Overview
+
+Intermittent 401 errors traced to a race condition in the Redis connection pool after the ioredis 5.x upgrade. Tried pool size increase and mutex — both rejected. Currently testing per-request connection with timeout.
+
 ## Goal
 
 Fix intermittent 401 errors on `/api/user` endpoint. Happens ~10% of requests under concurrent load.
 
-## Design Decisions
+## Key Decisions
 
 - Root cause identified: race condition in Redis connection pool (`src/redis/pool.ts:23`)
 - Chose connection locking over request queuing — simpler, lower latency impact
