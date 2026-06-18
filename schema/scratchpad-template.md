@@ -1,4 +1,6 @@
-# Scratchpad: [scope-name]
+Active: INDEX.md
+
+# Scratchpad: [branch-name]
 
 ## Status: [planning | in-progress | blocked | complete]
 

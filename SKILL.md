@@ -1,6 +1,6 @@
 ---
 name: agent-scratchpad
-version: 0.4.0
+version: 0.5.0
 description: >
   Per-branch persistent memory for agent sessions. Use this skill
   at the start of every session on a branch, before any other action.
@@ -37,21 +37,30 @@ The scratchpad captures the evolving state of work: what the branch is trying to
 
 ### 1. Locate or create the scratchpad
 
-**Always do this first.** Check for a scratchpad matching the current scope.
+**Always do this first.** The scratchpad lives in a per-branch folder.
 
-In a git repo, use the branch name:
+```
+scratchpad/
+└── <branch>/
+    ├── INDEX.md          ← always read this first
+    ├── <scope-a>.md      ← scoped scratchpads
+    └── <scope-b>.md
+```
+
+In a git repo, use the branch name as the folder name:
 
 ```bash
 BRANCH=$(git branch --show-current)
 ```
 
-Outside a git repo, ask the user for a scope name (e.g. "auth-refactor", "api-v2") and use that as the filename.
+Outside a git repo, ask the user for a scope name (e.g. "auth-refactor", "api-v2") and use that.
 
 Then:
-1. Create `scratchpad/` directory if it does not exist
-2. Check for `scratchpad/<scope>.md` — if it exists, read it
-3. If it does not exist, create it from the template at `schema/scratchpad-template.md`
-4. Add `scratchpad/` to `.gitignore` if not already present
+1. Create `scratchpad/<branch>/` directory if it does not exist
+2. If `INDEX.md` does not exist, create it from `schema/scratchpad-template.md`
+3. Read `INDEX.md` — check the `Active:` line at the top
+4. If `Active:` points to a scoped file, read that file too
+5. Add `scratchpad/` to `.gitignore` if not already present
 
 ### 2. Read the scratchpad
 
@@ -73,7 +82,7 @@ Update the scratchpad continuously as you work, not just at the end. Record deci
 
 Follow the template in `schema/scratchpad-template.md`. The scratchpad has these sections:
 
-- **Status** — current state of work on this branch
+- **Status** — current state of work on this branch/scope
 - **Goal** — what this branch is trying to accomplish
 - **Design Decisions** — choices made and rationale
 - **Approaches Tried** — approaches tested, what worked/didn't, why
@@ -86,16 +95,38 @@ If a user asks to write something specific to the scratchpad, do it — even if 
 
 ## Slash commands
 
-### `/scope` — Fresh scratchpad within a branch
+### `/scope` — Focus on a specific area within a branch
 
-Sometimes you need a clean scratchpad without switching branches — e.g. pivoting to a different problem on the same branch, or scoping a sub-task. Use `/scope` to create a new scratchpad with a user-provided name.
+When work branches into multiple concerns on the same branch, use `/scope` to create a focused scratchpad.
 
-```bash
-# User runs: /scope auth-refactor
-# Creates: scratchpad/auth-refactor.md
+1. Ask the user for the scope name
+2. Create `scratchpad/<branch>/<scope-name>.md` from the template
+3. Update `INDEX.md`'s `Active:` line to point to the new file
+4. Add a stub entry in `INDEX.md` listing this scope
+
+Example `INDEX.md` after running `/scope auth-refactor`:
+
+```markdown
+Active: auth-refactor.md
+
+# Scratchpad: feat/dark-mode
+
+## Status: in-progress
+
+## Goal
+Add dark mode toggle...
+
+## Scopes
+- [auth-refactor.md](auth-refactor.md) — refactoring auth middleware
 ```
 
-The previous scratchpad is preserved. This is useful when work branches into multiple concerns.
+### Concluding a scope
+
+When work on a scoped scratchpad is complete:
+
+1. Mark its status as `complete`
+2. Update `INDEX.md`'s `Active:` line back to `INDEX.md`
+3. Add a summary of the scope's outcome to `INDEX.md` under the relevant section
 
 ## Writing rules
 

@@ -1,3 +1,5 @@
+Active: INDEX.md
+
 # Scratchpad: fix/auth-race-condition
 
 ## Status: in-progress

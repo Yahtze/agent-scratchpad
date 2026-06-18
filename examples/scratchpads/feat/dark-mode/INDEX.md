@@ -1,3 +1,5 @@
+Active: auth-refactor.md
+
 # Scratchpad: feat/dark-mode
 
 ## Status: in-progress
@@ -18,15 +20,10 @@ Add dark mode toggle to user settings page. Persist preference to user profile, 
 1. **Tailwind dark: prefix** — rejected. Project uses CSS variables, not Tailwind utilities. Would require full migration.
 2. **Media query only** — rejected. Need user override for system preference. No persistence.
 
-## Architecture Notes
-
-- Design tokens: `src/styles/variables.css` — add `--color-bg-dark`, `--color-text-dark`, etc.
-- Existing stub: `src/providers/Theme.tsx` — empty, just renders children
-- User preferences API: `PUT /api/user/preferences` — already has unused `theme` field
-- Flash prevention: need to inject theme script in `<head>` before render
+## Scopes
+- [auth-refactor.md](auth-refactor.md) — refactoring auth middleware to support theme persistence
 
 ## Open Questions
 
-- Accessibility: should toggle support `aria-pressed` or `role="switch"`?
-- Should theme apply before React hydrates to prevent flash? Requires SSR consideration.
 - Design mockup not finalized for mobile — waiting on design team.
+- Should theme apply before React hydrates to prevent flash? Requires SSR consideration.

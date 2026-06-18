@@ -2,6 +2,15 @@
 
 All notable changes to agent-scratchpad will be documented in this file.
 
+## [0.5.0] - 2026-06-18
+
+### Changed
+- Scratchpads now use per-branch folders: `scratchpad/<branch>/INDEX.md`
+- Active scope tracked via `Active:` line at top of INDEX.md — no separate pointer file
+- `/scope` creates scoped scratchpad inside branch folder, updates INDEX.md
+- Scope conclusion workflow: mark complete, update `Active:` back to INDEX.md, add summary
+- Updated examples to show folder structure with scopes
+
 ## [0.4.0] - 2026-06-18
 
 ### Changed
