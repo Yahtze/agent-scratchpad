@@ -1,38 +1,33 @@
-# Scratchpad: Fix intermittent 401 errors on /api/user endpoint
+# Scratchpad: fix/auth-race-condition
 
 ## Status: in-progress
 
 ## Goal
 
-Users report getting random 401 errors on the /api/user endpoint. Happens ~10% of requests. Fix the root cause.
+Fix intermittent 401 errors on `/api/user` endpoint. Happens ~10% of requests under concurrent load.
 
-## Plan
+## Design Decisions
 
-- [x] Step 1: Reproduce the issue locally
-- [x] Step 2: Check auth middleware for race conditions
-- [x] Step 3: Inspect token validation logic
-- [ ] Step 4: Check Redis session store connection pooling
-- [ ] Step 5: Implement fix
-- [ ] Step 6: Add regression test
+- Root cause identified: race condition in Redis connection pool (`src/redis/pool.ts:23`)
+- Chose connection locking over request queuing — simpler, lower latency impact
+- Will not upgrade ioredis again until we have integration tests for connection pooling
 
-## Findings
+## Patches Tried
 
-- Reproduced: happens when 2+ requests hit simultaneously with same token
-- Auth middleware at `src/middleware/auth.ts:45` — validates token then checks Redis
-- Token validation is synchronous (JWT verify) — not the bottleneck
-- Redis lookup at line 52 is async but has no timeout handling
-- Found: `redis.getClient()` returns same connection without locking — possible race
+1. **Increased pool size to 20** — reduced frequency but did not fix. Rejected.
+2. **Added mutex to `getClient()`** — works but blocks all requests. Rejected.
+3. **Per-request connection with timeout** — current approach. Testing.
 
-## Hypotheses
+## Architecture Notes
 
-1. Redis connection pool exhaustion under load — rejecting connections silently
-2. Race condition in `getClient()` — two requests get same connection, second one fails
-3. Token cache TTL mismatch — cache expires between validation steps
+- Auth middleware at `src/middleware/auth.ts:45`
+  - Synchronous JWT verify → async Redis session lookup
+  - `redis.getClient()` returns shared connection (the bug)
+- Redis pool config in `src/redis/pool.ts`
+- Token cache TTL is 5 min, session TTL is 30 min — mismatch causes edge case
 
-Most likely: #2 — the `getClient()` function at `src/redis/pool.ts:23` has no mutex.
+## Context for Next Session
 
-## Notes
-
-- Issue started after upgrading `ioredis` from 4.x to 5.x last Tuesday
-- Related PR: #1247 (the upgrade)
+- Issue started after `ioredis` 4.x → 5.x upgrade (PR #1247)
 - Slack thread: #backend channel, June 15
+- To reproduce: run `k6 load test --scenario concurrent-auth` in `tests/load/`

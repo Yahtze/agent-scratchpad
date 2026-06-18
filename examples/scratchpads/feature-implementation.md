@@ -1,31 +1,33 @@
-# Scratchpad: Add dark mode toggle to settings page
+# Scratchpad: feat/dark-mode
 
 ## Status: in-progress
 
 ## Goal
 
-Add a dark mode toggle to the user settings page. Should persist preference to user profile and apply theme on all pages.
+Add dark mode toggle to user settings page. Persist preference to user profile, apply theme site-wide.
 
-## Plan
+## Design Decisions
 
-- [x] Step 1: Audit existing theme/styling system
-- [x] Step 2: Add dark color tokens to design system
-- [x] Step 3: Create ThemeProvider context
-- [ ] Step 4: Build toggle component
-- [ ] Step 5: Wire up to user settings API
-- [ ] Step 6: Apply theme on page load (flash prevention)
-- [ ] Step 7: Test all pages in dark mode
+- Using CSS custom properties (already in `src/styles/variables.css`) — no new dependencies
+- Theme state via React context (`ThemeProvider`) — matches existing pattern for auth/i18n
+- System preference detection with `prefers-color-scheme` as default, user can override
+- Toggle in settings page, not header — design team decision (Figma: #design channel, June 16)
 
-## Findings
+## Patches Tried
 
-- Design system uses CSS variables in `src/styles/variables.css`
-- Light theme tokens already exist: `--color-bg`, `--color-text`, etc.
-- No dark theme tokens yet — need to add `--color-bg-dark` etc.
-- User settings API at `PUT /api/user/preferences` — already has `theme` field (unused)
-- Existing ThemeProvider stub in `src/providers/Theme.tsx` — empty, just renders children
+1. **Tailwind dark: prefix** — rejected. Project uses CSS variables, not Tailwind utilities.
+2. **Media query only** — rejected. Need user override for system preference.
 
-## Notes
+## Architecture Notes
 
-- Design mockup: Figma link in #design channel, June 16
-- Should support system preference detection via `prefers-color-scheme`
-- Accessibility requirement: toggle must be keyboard navigable
+- Design tokens: `src/styles/variables.css` — add `--color-bg-dark`, `--color-text-dark`, etc.
+- Existing stub: `src/providers/Theme.tsx` — empty, just renders children
+- User preferences API: `PUT /api/user/preferences` — already has unused `theme` field
+- Flash prevention: need to inject theme script in `<head>` before render
+
+## Context for Next Session
+
+- Dark color tokens added to variables.css (commit abc1234)
+- ThemeProvider created at `src/providers/Theme.tsx`
+- Next: build toggle component, wire to API, test all pages
+- Accessibility: toggle must be keyboard navigable (WCAG 2.1 AA)

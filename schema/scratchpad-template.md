@@ -1,28 +1,27 @@
-# Scratchpad: [task summary]
+# Scratchpad: [branch-name]
 
-## Status: planning
+## Status: [planning | in-progress | blocked | complete]
 
 ## Goal
 
-[What are we trying to accomplish? Be specific.]
+[What is this branch trying to accomplish?]
 
-## Plan
+## Design Decisions
 
-- [ ] Step 1: [description]
-- [ ] Step 2: [description]
-- [ ] Step 3: [description]
-
-## Findings
-
-<!-- Add discoveries here as you work -->
+<!-- Choices made and why -->
 - 
 
-## Hypotheses
+## Patches Tried
 
-<!-- For debugging: what might be wrong -->
+<!-- Approaches tested, outcomes, reasons for rejection -->
 - 
 
-## Notes
+## Architecture Notes
 
-<!-- Anything else worth remembering -->
+<!-- How things fit together, relevant file locations, dependencies -->
+- 
+
+## Context for Next Session
+
+<!-- Anything a fresh agent or another agent needs to know -->
 - 
