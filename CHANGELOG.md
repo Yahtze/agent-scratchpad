@@ -2,6 +2,18 @@
 
 All notable changes to agent-scratchpad will be documented in this file.
 
+## [0.6.0] - 2026-06-18
+
+### Added
+- `install.sh` — one-line install script for cloning into user repos
+- `SETUP.md` — setup instructions for LLMs and manual install
+- Split templates: `schema/index-template.md` (branch overview) and `schema/scope-template.md` (scoped scratchpads)
+
+### Changed
+- INDEX.md has separate sections: Key Decisions, Architecture Notes, Open Questions
+- Scoped scratchpads have: Design Decisions, Approaches Tried, Architecture Notes, Open Questions
+- Updated README with install instructions
+
 ## [0.5.0] - 2026-06-18
 
 ### Changed

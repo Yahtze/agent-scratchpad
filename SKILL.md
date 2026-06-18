@@ -1,6 +1,6 @@
 ---
 name: agent-scratchpad
-version: 0.5.0
+version: 0.6.0
 description: >
   Per-branch persistent memory for agent sessions. Use this skill
   at the start of every session on a branch, before any other action.

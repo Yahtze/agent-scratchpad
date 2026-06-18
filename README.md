@@ -19,6 +19,16 @@ scratchpad/
 - **Scoped scratchpads** — focus on specific areas within a branch via `/scope`
 - **Survives context limits** — persists between sessions and agent restarts
 
+## Install
+
+Run from your repository root:
+
+```bash
+bash <(curl -s https://raw.githubusercontent.com/Yahtze/agent-scratchpad/main/install.sh)
+```
+
+See [SETUP.md](SETUP.md) for manual setup and LLM-based setup instructions.
+
 ## How it works
 
 1. Agent checks for `scratchpad/<branch>/INDEX.md`
@@ -31,7 +41,9 @@ scratchpad/
 
 | File | Purpose |
 |---|---|
-| `SKILL.md` | The skill file — install this |
+| `SKILL.md` | The skill file |
+| `install.sh` | One-line install script |
+| `SETUP.md` | Setup instructions for LLMs and manual install |
 | `schema/index-template.md` | Template for INDEX.md (branch overview) |
 | `schema/scope-template.md` | Template for scoped scratchpads |
 | `examples/scratchpads/` | Example scratchpads showing real usage |
