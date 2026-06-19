@@ -2,6 +2,12 @@
 
 All notable changes to agent-scratchpad will be documented in this file.
 
+## [0.9.0] - 2026-06-18
+
+### Added
+- `install-global.sh` — global install to `~/.agent-scratchpad/`, works across all repos
+- Global AGENTS.md at `~/.agents/AGENTS.md`
+
 ## [0.8.0] - 2026-06-18
 
 ### Added

@@ -22,7 +22,17 @@ scratchpad/
 
 ## Install
 
-Run from your repository root:
+### Global (recommended)
+
+Install once, works in every repo:
+
+```bash
+bash <(curl -s https://raw.githubusercontent.com/Yahtze/agent-scratchpad/main/install-global.sh)
+```
+
+### Per-repo
+
+Install into a single repository:
 
 ```bash
 bash <(curl -s https://raw.githubusercontent.com/Yahtze/agent-scratchpad/main/install.sh)
@@ -43,7 +53,8 @@ See [SETUP.md](SETUP.md) for manual setup and LLM-based setup instructions.
 | File | Purpose |
 |---|---|
 | `SKILL.md` | The skill file |
-| `install.sh` | One-line install script |
+| `install.sh` | Per-repo install script |
+| `install-global.sh` | Global install script (works across all repos) |
 | `SETUP.md` | Setup instructions for LLMs and manual install |
 | `schema/index-template.md` | Template for INDEX.md (branch overview) |
 | `schema/scope-template.md` | Template for scoped scratchpads |

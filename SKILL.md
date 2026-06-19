@@ -1,6 +1,6 @@
 ---
 name: agent-scratchpad
-version: 0.6.0
+version: 0.9.0
 description: >
   Per-branch persistent memory for agent sessions. Use this skill
   at the start of every session on a branch, before any other action.
@@ -57,10 +57,12 @@ Outside a git repo, ask the user for a scope name (e.g. "auth-refactor", "api-v2
 
 Then:
 1. Create `scratchpad/<branch>/` directory if it does not exist
-2. If `INDEX.md` does not exist, create it from `schema/index-template.md`
+2. If `INDEX.md` does not exist, create it from the template at `<skill-dir>/schema/index-template.md`
 3. Read `INDEX.md` — check the `Active:` line at the top
 4. If `Active:` points to a scoped file, read that file too
 5. Add `scratchpad/` to `.gitignore` if not already present
+
+**Note:** All template paths (`schema/...`) are relative to the SKILL.md file location. When installed globally at `~/.agent-scratchpad/`, use `~/.agent-scratchpad/schema/`.
 
 ### 2. Read the scratchpad
 

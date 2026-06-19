@@ -1,18 +1,37 @@
 # Setup Instructions
 
-## Option 1: Install script (recommended)
+## Option 1: Global install (recommended)
 
-Run this from your repository root:
+Install once, works in every repo.
 
 ```bash
-bash <(curl -s https://raw.githubusercontent.com/Yahtze/agent-scratchpad/main/install.sh)
+bash <(curl -s https://raw.githubusercontent.com/Yahtze/agent-scratchpad/main/install-global.sh)
 ```
 
 Or clone first and run locally:
 
 ```bash
 git clone --depth 1 git@github.com:Yahtze/agent-scratchpad.git /tmp/agent-scratchpad
-bash /tmp/agent-scratchpad/install.sh
+bash /tmp/agent-scratchpad/install-global.sh
+```
+
+The script will:
+1. Clone agent-scratchpad to `~/.agent-scratchpad/`
+2. Add the agent-scratchpad rules to `~/.agents/AGENTS.md`
+
+No per-repo setup needed. Works across all repositories automatically.
+
+To update later:
+```bash
+bash ~/.agent-scratchpad/install-global.sh
+```
+
+## Option 2: Per-repo install
+
+Install into a single repository.
+
+```bash
+bash <(curl -s https://raw.githubusercontent.com/Yahtze/agent-scratchpad/main/install.sh)
 ```
 
 The script will:
@@ -20,7 +39,7 @@ The script will:
 2. Add `agent-scratchpad/` to `.gitignore`
 3. Add the agent-scratchpad rules to `AGENTS.md`
 
-## Option 2: LLM setup
+## Option 3: LLM setup
 
 Give this file to your LLM. It contains the instructions to install agent-scratchpad in your repository.
 
@@ -53,6 +72,7 @@ Rules:
 - If the scratchpad doesn't exist, create it from `agent-scratchpad/schema/index-template.md`
 - Update the scratchpad continuously as you work — don't wait until the end
 - Use `/scope` to create focused scratchpads when work branches into multiple concerns
+- Use `/todo` to add future work items to `scratchpad/TODO.md`
 - Add `scratchpad/` to `.gitignore` if not already present
 ```
 
@@ -76,8 +96,8 @@ After completing the above, confirm to the user:
 
 ---
 
-## Option 3: Manual setup
+## Option 4: Manual setup
 
 1. Clone or download this repository into your repo as `agent-scratchpad/`
-2. Add the agent-scratchpad rules to your `AGENTS.md` (see block in Option 2)
+2. Add the agent-scratchpad rules to your `AGENTS.md` (see block in Option 3)
 3. Add `agent-scratchpad/` to `.gitignore`
