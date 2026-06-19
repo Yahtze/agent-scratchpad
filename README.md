@@ -8,6 +8,7 @@ Creates a per-branch scratchpad that serves as the primary memory point for unde
 
 ```
 scratchpad/
+├── TODO.md              ← shared backlog across all branches
 └── <branch>/
     ├── INDEX.md          ← branch overview, always read first
     ├── auth-refactor.md  ← scoped scratchpad
@@ -46,11 +47,14 @@ See [SETUP.md](SETUP.md) for manual setup and LLM-based setup instructions.
 | `SETUP.md` | Setup instructions for LLMs and manual install |
 | `schema/index-template.md` | Template for INDEX.md (branch overview) |
 | `schema/scope-template.md` | Template for scoped scratchpads |
+| `schema/todo-template.md` | Template for shared TODO backlog |
 | `examples/scratchpads/` | Example scratchpads showing real usage |
 
 ## Slash commands
 
 **`/scope`** — Create a focused scratchpad within a branch. Useful when work branches into multiple concerns. The INDEX.md tracks which scope is active.
+
+**`/todo`** — Add a future work item to the shared backlog (`scratchpad/TODO.md`). Useful for logging bugs, improvements, or ideas that come up during a session but are out of scope for the current version.
 
 ## License
 

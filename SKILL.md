@@ -144,6 +144,40 @@ When work on a scoped scratchpad is complete:
 2. Update `INDEX.md`'s `Active:` line back to `INDEX.md`
 3. Add a summary of the scope's outcome to `INDEX.md` under the relevant section
 
+### `/todo` — Log future work items
+
+When the agent suggests potential future work, bug fixes, or improvements that are out of scope for the current version, use `/todo` to add them to a shared backlog.
+
+The TODO file lives at `scratchpad/TODO.md` — shared across all branches.
+
+1. If `scratchpad/TODO.md` does not exist, create it from `schema/todo-template.md`
+2. Add a new entry with enough detail to act on later (like a ticket)
+3. Each entry should include: what, why, acceptance criteria, and any relevant context
+
+Format for a new entry:
+
+```markdown
+### TODO-XXX: [Short title]
+
+- **Added:** [date]
+- **Added by:** [branch name]
+- **Priority:** [low | medium | high]
+
+[Description of the problem or opportunity. Why it matters. What should be done.]
+
+**Acceptance criteria:**
+- [ ] [What does "done" look like?]
+- [ ] [Specific, testable conditions]
+```
+
+When a TODO item is completed:
+
+1. Mark it with `[x]` checkboxes in the acceptance criteria
+2. Add a `- **Completed:** [date]` line at the top of the entry
+3. Optionally add a note about the solution or which branch/PR addressed it
+
+Read `scratchpad/TODO.md` at the start of a session if it exists — it may contain work relevant to the current branch.
+
 ## Writing rules
 
 - Reference file paths and line numbers

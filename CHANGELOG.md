@@ -2,6 +2,14 @@
 
 All notable changes to agent-scratchpad will be documented in this file.
 
+## [0.8.0] - 2026-06-18
+
+### Added
+- `/todo` slash command — adds future work items to shared `scratchpad/TODO.md` backlog
+- `schema/todo-template.md` — template for TODO file with ticket-style entry format
+- TODO items include: date, branch, priority, description, acceptance criteria
+- Completed items move to Completed section with date and optional note
+
 ## [0.6.0] - 2026-06-18
 
 ### Added
