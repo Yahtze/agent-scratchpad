@@ -1,34 +1,18 @@
 # Setup Instructions
 
-## Option 1: Global install (recommended)
+## Option 1: Quick install (any harness)
 
-Install once, works in every repo.
-
-```bash
-bash <(curl -s https://raw.githubusercontent.com/Yahtze/agent-scratchpad/main/install-global.sh)
-```
-
-Or clone first and run locally:
+Uses the [skills](https://github.com/vercel-labs/skills) CLI — works with Pi, Claude Code, Codex, Cursor, and 50+ other agents:
 
 ```bash
-git clone --depth 1 git@github.com:Yahtze/agent-scratchpad.git /tmp/agent-scratchpad
-bash /tmp/agent-scratchpad/install-global.sh
+npx skills@latest add Yahtze/agent-scratchpad
 ```
 
-The script will:
-1. Clone agent-scratchpad to `~/.agent-scratchpad/`
-2. Add the agent-scratchpad rules to `~/.agents/AGENTS.md`
-
-No per-repo setup needed. Works across all repositories automatically.
-
-To update later:
-```bash
-bash ~/.agent-scratchpad/install-global.sh
-```
+Pick the skills you want and which coding agents to install them on.
 
 ## Option 2: Per-repo install
 
-Install into a single repository.
+Install into a single repository (works with any harness).
 
 ```bash
 bash <(curl -s https://raw.githubusercontent.com/Yahtze/agent-scratchpad/main/install.sh)

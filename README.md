@@ -22,15 +22,17 @@ scratchpad/
 
 ## Install
 
-### Global (recommended)
+### Quick install (any harness)
 
-Install once, works in every repo:
+Uses the [skills](https://github.com/vercel-labs/skills) CLI — works with Pi, Claude Code, Codex, Cursor, and 50+ other agents:
 
 ```bash
-bash <(curl -s https://raw.githubusercontent.com/Yahtze/agent-scratchpad/main/install-global.sh)
+npx skills@latest add Yahtze/agent-scratchpad
 ```
 
-### Per-repo
+Pick the skills you want and which coding agents to install them on.
+
+### Per-repo (any harness)
 
 Install into a single repository:
 
@@ -53,8 +55,7 @@ See [SETUP.md](SETUP.md) for manual setup and LLM-based setup instructions.
 | File | Purpose |
 |---|---|
 | `SKILL.md` | The skill file |
-| `install.sh` | Per-repo install script |
-| `install-global.sh` | Global install script (works across all repos) |
+| `install.sh` | Per-repo install script (any harness) |
 | `SETUP.md` | Setup instructions for LLMs and manual install |
 | `schema/index-template.md` | Template for INDEX.md (branch overview) |
 | `schema/scope-template.md` | Template for scoped scratchpads |
