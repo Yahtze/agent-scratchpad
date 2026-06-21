@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "skills": {
+    "agent-scratchpad": {
+      "source": "Yahtze/agent-scratchpad",
+      "sourceType": "github",
+      "skillPath": "SKILL.md",
+      "computedHash": "3b8f0e1083013b2336faf1b31e75ec11b593d124b80029808b40c4fd5006d9df"
+    }
+  }
+}

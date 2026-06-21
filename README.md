@@ -32,6 +32,16 @@ npx skills@latest add Yahtze/agent-scratchpad
 
 Pick the skills you want and which coding agents to install them on.
 
+### Bootstrap
+
+After installing, run the setup skill to add the rules to AGENTS.md:
+
+```
+/setup-agent-scratchpad
+```
+
+This adds the rules that tell agents to automatically read/write the scratchpad at session start.
+
 ### Per-repo (any harness)
 
 Install into a single repository:
@@ -55,6 +65,7 @@ See [SETUP.md](SETUP.md) for manual setup and LLM-based setup instructions.
 | File | Purpose |
 |---|---|
 | `SKILL.md` | The skill file |
+| `skills/setup-agent-scratchpad/` | Bootstrap skill — adds AGENTS.md rules |
 | `install.sh` | Per-repo install script (any harness) |
 | `SETUP.md` | Setup instructions for LLMs and manual install |
 | `schema/index-template.md` | Template for INDEX.md (pointer file) |
