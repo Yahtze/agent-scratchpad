@@ -20,13 +20,13 @@ The scratchpad captures the evolving state of work: what the branch is trying to
 
 1. **INDEX.md is a pointer file only.** It contains metadata (Status, Overview one-liner, Goal one-liner, Scopes list) and nothing else. NEVER write content into INDEX.md.
 
-2. **All content goes in the Active file.** The `Active:` line in INDEX.md points to the file where you write. On branch init, this is `work.md`.
+2. **All content goes in the Active file.** The `Active:` line in INDEX.md points to the file where you write. On branch init, this defaults to `work.md` but can be named anything appropriate — the `Active:` line is what matters, not the filename.
 
 3. **NEVER create new .md files unless the user explicitly runs `/scope`.** Do not create files like `auth.md`, `api-design.md`, `debugging.md` etc. on your own initiative. If you need to organize work, use sections in the Active file.
 
 4. **Write to the Active file only.** Check the `Active:` line in INDEX.md. Write to that file. Do not write to INDEX.md or other files.
 
-5. **One scratchpad per branch by default.** The default setup is INDEX.md + work.md. Additional files require explicit `/scope` command.
+5. **One scratchpad per branch by default.** The default setup is INDEX.md + one content file (typically `work.md`). Additional files require explicit `/scope` command.
 
 ## When to use
 
