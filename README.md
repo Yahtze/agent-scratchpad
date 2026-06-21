@@ -42,14 +42,6 @@ After installing, run the setup skill to add the rules to AGENTS.md:
 
 This adds the rules that tell agents to automatically read/write the scratchpad at session start.
 
-### Per-repo (any harness)
-
-Install into a single repository:
-
-```bash
-bash <(curl -s https://raw.githubusercontent.com/Yahtze/agent-scratchpad/main/install.sh)
-```
-
 See [SETUP.md](SETUP.md) for manual setup and LLM-based setup instructions.
 
 ## How it works
@@ -66,7 +58,6 @@ See [SETUP.md](SETUP.md) for manual setup and LLM-based setup instructions.
 |---|---|
 | `SKILL.md` | The skill file |
 | `skills/setup-agent-scratchpad/` | Bootstrap skill — adds AGENTS.md rules |
-| `install.sh` | Per-repo install script (any harness) |
 | `SETUP.md` | Setup instructions for LLMs and manual install |
 | `schema/index-template.md` | Template for INDEX.md (pointer file) |
 | `schema/work-template.md` | Template for default scratchpad (content lives here) |

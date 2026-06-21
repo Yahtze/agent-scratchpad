@@ -10,20 +10,13 @@ npx skills@latest add Yahtze/agent-scratchpad
 
 Pick the skills you want and which coding agents to install them on.
 
-## Option 2: Per-repo install
+Then bootstrap:
 
-Install into a single repository (works with any harness).
-
-```bash
-bash <(curl -s https://raw.githubusercontent.com/Yahtze/agent-scratchpad/main/install.sh)
+```
+/setup-agent-scratchpad
 ```
 
-The script will:
-1. Clone agent-scratchpad into `agent-scratchpad/` in your repo
-2. Add `agent-scratchpad/` to `.gitignore`
-3. Add the agent-scratchpad rules to `AGENTS.md`
-
-## Option 3: LLM setup
+## Option 2: LLM setup
 
 Give this file to your LLM. It contains the instructions to install agent-scratchpad in your repository.
 
@@ -54,6 +47,7 @@ Rules:
 - If it exists, read it before doing anything else — it contains the full context of the branch
 - If the `Active:` line points to a scoped file, read that file too
 - If the scratchpad doesn't exist, create it from `agent-scratchpad/schema/index-template.md`
+- Also create the content file from `agent-scratchpad/schema/work-template.md` if it doesn't exist
 - Update the scratchpad continuously as you work — don't wait until the end
 - Use `/scope` to create focused scratchpads when work branches into multiple concerns
 - Use `/todo` to add future work items to `scratchpad/TODO.md`
@@ -80,8 +74,8 @@ After completing the above, confirm to the user:
 
 ---
 
-## Option 4: Manual setup
+## Option 3: Manual setup
 
 1. Clone or download this repository into your repo as `agent-scratchpad/`
-2. Add the agent-scratchpad rules to your `AGENTS.md` (see block in Option 3)
+2. Add the agent-scratchpad rules to your `AGENTS.md` (see block in Option 2)
 3. Add `agent-scratchpad/` to `.gitignore`
