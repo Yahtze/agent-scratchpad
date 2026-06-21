@@ -14,6 +14,20 @@ A per-branch scratchpad that serves as the primary memory point for understandin
 
 The scratchpad captures the evolving state of work: what the branch is trying to accomplish, which approaches were explored and why they were accepted or rejected, how the architecture is being shaped, and what open questions remain. It is a living document that grows with the branch, not a one-time dump.
 
+## Hardening rules
+
+**These rules prevent common failure modes. Follow them strictly.**
+
+1. **INDEX.md is a pointer file only.** It contains metadata (Status, Overview one-liner, Goal one-liner, Scopes list) and nothing else. NEVER write content into INDEX.md.
+
+2. **All content goes in the Active file.** The `Active:` line in INDEX.md points to the file where you write. On branch init, this is `work.md`.
+
+3. **NEVER create new .md files unless the user explicitly runs `/scope`.** Do not create files like `auth.md`, `api-design.md`, `debugging.md` etc. on your own initiative. If you need to organize work, use sections in the Active file.
+
+4. **Write to the Active file only.** Check the `Active:` line in INDEX.md. Write to that file. Do not write to INDEX.md or other files.
+
+5. **One scratchpad per branch by default.** The default setup is INDEX.md + work.md. Additional files require explicit `/scope` command.
+
 ## When to use
 
 ### Always read the scratchpad when:
@@ -42,9 +56,8 @@ The scratchpad captures the evolving state of work: what the branch is trying to
 ```
 scratchpad/
 └── <branch>/
-    ├── INDEX.md          ← always read this first
-    ├── <scope-a>.md      ← scoped scratchpads
-    └── <scope-b>.md
+    ├── INDEX.md          ← pointer file (metadata only)
+    └── work.md           ← all content goes here
 ```
 
 In a git repo, use the branch name as the folder name:
@@ -57,10 +70,11 @@ Outside a git repo, ask the user for a scope name (e.g. "auth-refactor", "api-v2
 
 Then:
 1. Create `scratchpad/<branch>/` directory if it does not exist
-2. If `INDEX.md` does not exist, create it from the template at `<skill-dir>/schema/index-template.md`
-3. Read `INDEX.md` — check the `Active:` line at the top
-4. If `Active:` points to a scoped file, read that file too
-5. Add `scratchpad/` to `.gitignore` if not already present
+2. If `INDEX.md` does not exist, create it from `<skill-dir>/schema/index-template.md`
+3. If `work.md` does not exist, create it from `<skill-dir>/schema/work-template.md`
+4. Read `INDEX.md` — check the `Active:` line at the top
+5. Read the file pointed to by `Active:` (usually `work.md`)
+6. Add `scratchpad/` to `.gitignore` if not already present
 
 **Note:** All template paths (`schema/...`) are relative to the SKILL.md file location. When installed globally at `~/.agent-scratchpad/`, use `~/.agent-scratchpad/schema/`.
 
@@ -82,26 +96,28 @@ Update the scratchpad continuously as you work, not just at the end. Record deci
 
 ### 4. Structure
 
-Two templates in `schema/`:
+Three templates in `schema/`:
 
-**INDEX.md** (`schema/index-template.md`) — the branch overview:
+**INDEX.md** (`schema/index-template.md`) — pointer file, metadata only:
 
-- **Status** — current state of work on this branch
-- **Overview** — high-level summary of the branch: what, why, current state. Updated on scope changes.
-- **Goal** — what this branch is trying to accomplish
-- **Scopes** — list of scoped scratchpads with one-line descriptions
-- **Key Decisions** — branch-level design decisions
-- **Architecture Notes** — branch-level architecture, key file locations
-- **Open Questions** — branch-level unresolved issues
+- **Active** — which file to read/write (default: `work.md`)
+- **Status** — one word: planning, in-progress, blocked, complete
+- **Overview** — one sentence max
+- **Goal** — one sentence max
+- **Scopes** — list of scoped scratchpads (only added via `/scope`)
 
-**Scoped scratchpads** (`schema/scope-template.md`) — focused on a specific area:
+**work.md** (`schema/work-template.md`) — default scratchpad, all content goes here:
 
-- **Status** — current state of this scope
-- **Goal** — what this scope is trying to accomplish
-- **Design Decisions** — choices made within this scope
-- **Approaches Tried** — approaches tested, outcomes, reasons for rejection
-- **Architecture Notes** — how this scope fits into the codebase
-- **Open Questions** — unresolved issues within this scope
+- **Status** — current state of work
+- **Key Decisions** — design decisions and rationale
+- **Approaches Tried** — what was tested, what failed, what worked
+- **Architecture Notes** — file locations, dependencies, gotchas
+- **Work Log** — running log of what was done
+- **Open Questions** — unresolved issues
+
+**Scoped scratchpads** (`schema/scope-template.md`) — created only via `/scope`:
+
+- Same structure as work.md, focused on a specific area
 
 ### 5. Explicit writes
 
@@ -110,6 +126,8 @@ If a user asks to write something specific to the scratchpad, do it — even if 
 ## Slash commands
 
 ### `/scope` — Focus on a specific area within a branch
+
+**This is the ONLY way to create new .md files.** Do not create files without explicit `/scope` command.
 
 When work branches into multiple concerns on the same branch, use `/scope` to create a focused scratchpad.
 
@@ -129,10 +147,10 @@ Active: auth-refactor.md
 ## Status: in-progress
 
 ## Overview
-Adding dark mode to the app. Currently refactoring auth middleware to support theme persistence in session tokens.
+Refactoring auth middleware for theme persistence.
 
 ## Goal
-Add dark mode toggle...
+Add dark mode toggle with session-persisted preference.
 
 ## Scopes
 - [auth-refactor.md](auth-refactor.md) — refactoring auth middleware to support theme persistence
@@ -182,6 +200,9 @@ Read `scratchpad/TODO.md` at the start of a session if it exists — it may cont
 
 ## Writing rules
 
+- **Write to the Active file only** — check `Active:` line in INDEX.md
+- **INDEX.md is pointer-only** — never write content into it
+- **No file creation without `/scope`** — use sections in Active file instead
 - Reference file paths and line numbers
 - Keep entries concise — bullets over paragraphs
 - Record *why* something was rejected, not just *that* it was

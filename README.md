@@ -57,7 +57,8 @@ See [SETUP.md](SETUP.md) for manual setup and LLM-based setup instructions.
 | `SKILL.md` | The skill file |
 | `install.sh` | Per-repo install script (any harness) |
 | `SETUP.md` | Setup instructions for LLMs and manual install |
-| `schema/index-template.md` | Template for INDEX.md (branch overview) |
+| `schema/index-template.md` | Template for INDEX.md (pointer file) |
+| `schema/work-template.md` | Template for default scratchpad (content lives here) |
 | `schema/scope-template.md` | Template for scoped scratchpads |
 | `schema/todo-template.md` | Template for shared TODO backlog |
 | `examples/scratchpads/` | Example scratchpads showing real usage |
